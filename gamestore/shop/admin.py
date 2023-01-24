@@ -5,7 +5,7 @@ from .models import Category, Game
 
 
 class GameAdmin(admin.ModelAdmin):
-    # отображаемые поля в админке
+    # отображаемые поля в панеле администратора
     list_display = ('id', 'title','price')
     list_display_links = ('id', 'title')
     # поиск по полям
@@ -13,7 +13,7 @@ class GameAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('title',)}
 
 class CategoryAdmin(admin.ModelAdmin):
-    # отображаемые поля в админке
+    # отображаемые поля в панеле администратора
     list_display = ('id', 'name')
     list_display_links = ('id', 'name')
     # поиск по полям
@@ -21,4 +21,4 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
 
 admin.site.register(Game, GameAdmin)
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
