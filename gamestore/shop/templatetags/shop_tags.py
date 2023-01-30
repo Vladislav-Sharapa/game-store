@@ -21,3 +21,8 @@ def get_related_games(game):
         return {'games': random_games}
     else:
         return None
+
+
+@register.simple_tag()
+def get_category_list():
+    return Category.objects.all()
