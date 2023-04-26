@@ -1,0 +1,73 @@
+{% extends 'shop/layout.html' %}
+
+
+{%block content%}
+<div class="px-4 px-lg-0">
+    <div class="pb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+  
+            <!-- Shopping cart table -->
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col" class="border-0 bg-light">
+                      <div class="p-2 px-3 text-uppercase">Product</div>
+                    </th>
+                    <th scope="col" class="border-0 bg-light">
+                      <div class="py-2 text-uppercase">Price</div>
+                    </th>
+                    <th scope="col" class="border-0 bg-light">
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                      {% with game=item.game%}
+                      <tr>
+                        <th scope="row" class="border-0">
+                          <div class="p-2">
+                            <div class="ml-3 d-inline-block align-middle">
+                              <h5 class="mb-0"> <a href="{{game.get_absolute_url}}" style="text-decoration: none;" class="text-dark d-inline-block align-middle">{{game.title}}</a></h5><span class="text-muted font-weight-normal font-italic d-block">{{game.category}}</span>
+                            </div>
+                          </div>
+                        </th>
+                        <td class="border-0 align-middle"><strong>${{game.price}}</strong></td>
+                        <td class="border-0 align-middle"><button class="btn btn-danger">Remove</button></td>
+                      </tr>
+                      {% endwith %}
+                    {% endfor %} 
+                </tbody>
+              </table>
+            </div>
+            <!-- End -->
+          </div>
+        </div>
+  
+        <div class="row py-2 p-4 bg-white rounded shadow-sm">
+          <div class="col-lg-6">
+          </div>
+          <div class="col-lg-6">
+              <ul class="list-unstyled mb-4">
+                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                  <h5 class="font-weight-bold">${{cart.get_total_price}}</h5>
+                </li>
+              </ul>
+              <div class="row">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6 float-end">
+                    <div class="row float-end">
+                        <a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Checkout</a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%endblock%}
