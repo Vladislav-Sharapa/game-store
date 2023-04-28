@@ -1,5 +1,5 @@
 {% extends 'shop/layout.html' %}
-
+{% block title %}Cart{% endblock %}
 
 {%block content%}
 <div class="px-4 px-lg-0">
@@ -35,7 +35,9 @@
                           </div>
                         </th>
                         <td class="border-0 align-middle"><strong>${{game.price}}</strong></td>
-                        <td class="border-0 align-middle"><button class="btn btn-danger">Remove</button></td>
+                        <td class="border-0 align-middle">
+                          <a class="btn btn-danger" href="{% url 'cart:cart_remove' game.slug%}">Remove</a>
+                        </td>
                       </tr>
                       {% endwith %}
                     {% endfor %} 

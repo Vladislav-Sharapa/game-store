@@ -13,7 +13,7 @@ class Cart(object):
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
-    def add(self, game) -> None:
+    def add(self, game: Game) -> None:
         """Add game to the cart"""
         game_id = str(game.id)
         if game_id not in self.cart:
@@ -22,11 +22,11 @@ class Cart(object):
         self.save()
 
 
-    def remove(self, game) -> None:
+    def remove(self, game: Game) -> None:
         """Remove game from cart"""
         game_id = str(game.id)
         if game_id in self.cart:
-            del self.cart[game.id]
+            del self.cart[game_id]
             self.save()
 
     def save(self) -> None:
@@ -49,7 +49,7 @@ class Cart(object):
 
     def get_total_price(self) -> Decimal:
         '''Get total price of all item in cart'''
-        return sum(Decimal(item['price'] for item in self.cart.values()))
+        return sum(item['price'] for item in self.cart.values())
         
     def clear(self) -> None:
         """Clear cart"""
