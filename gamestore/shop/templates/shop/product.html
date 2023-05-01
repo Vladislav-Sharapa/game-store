@@ -17,11 +17,10 @@
                     </div>
                     <p class="lead">{{game.description}}</p>
                     <div class="d-flex">
-                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                            <i class="bi-cart-fill me-1"></i>
-                            Add to cart
-                        </button>
+                        <form action="{% url 'cart:cart_add' game.slug %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-outline-dark flex-shrink-0" value="Add to cart">
+                        </form>     
                     </div>
                 </div>
             </div>
