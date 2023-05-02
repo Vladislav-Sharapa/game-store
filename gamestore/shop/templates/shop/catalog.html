@@ -24,12 +24,13 @@
                     </form>
                 </div>
                 <div class="col-sm-4">
-                    <div class="input-group">
-                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                        <button type="button" class="btn btn-outline-dark">search</button>
+                    <form action="{% url 'catalog_search' %}" class="input-group">
+                        <input type="text" name="q" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit" class="btn btn-outline-dark">search</button>
+                    </form>
                     </div>
                 </div>
-            </div>
+            {% if games %}
             <div class="row" >
                 <div class="col">
                     <div class="row gx-4 gx-lg-5 col-sm row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">
