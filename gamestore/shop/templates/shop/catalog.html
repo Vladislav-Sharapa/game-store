@@ -4,97 +4,102 @@
 {% block title %}Catalog{% endblock %}
 
 {% block content %}
-    <section class="pb-5">
+    <section class="pb-5" style="min-height: 480px;">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row pb-3">
                 <div class="col-sm-2">
-                    <form action="#" method="get">
-                        {% get_category_list as categories %}
-                        <div class="dropdown">
-                            <a class="btn border dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                              {{ current_category }}
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="{% url 'catalog' %}">All category</a></li>
-                                {% for category in categories %}
-                                    <li><a class="dropdown-item" href="{% url 'catalog_view' category.slug %}">{{ category.name }}</a></li>
-                                {% endfor %}
-                            </ul>
-                          </div>
-                    </form>
+                    {% get_category_list as categories %}
+                    <div class="dropdown">
+                        <a class="btn border dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{ current_category }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="{% url 'catalog' %}">All category</a></li>
+                            {% for category in categories %}
+                                <li><a class="dropdown-item" href="{% url 'catalog_view' category.slug %}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div> 
                 </div>
                 <div class="col-sm-4">
                     <form action="{% url 'catalog_search' %}" class="input-group">
                         <input type="text" name="q" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                         <button type="submit" class="btn btn-outline-dark">search</button>
                     </form>
-                    </div>
                 </div>
+            </div>
             {% if games %}
-            <div class="row" >
-                <div class="col">
-                    <div class="row gx-4 gx-lg-5 col-sm row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">
-                        {% for game in games %}
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <!-- Product image-->
-                                    <img class="card-img-top img-responsive" src="{{game.horizontal_photo.url}}" alt="..." />
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">{{game.title}}</h5>
-                                            <!-- Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill"></div>
-                                                <div class="bi-star-fill"></div>
-                                                <div class="bi-star-fill"></div>
-                                                <div class="bi-star-fill"></div>
-                                                <div class="bi-star-fill"></div>
+                <div class="row" >
+                    <div class="col">
+                        <div class="row gx-4 gx-lg-5 col-sm row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">
+                            {% for game in games %}
+                                <div class="col mb-5">
+                                    <div class="card h-100">
+                                        <!-- Product image-->
+                                        <img class="card-img-top img-responsive" src="{{game.horizontal_photo.url}}" alt="..." />
+                                        <!-- Product details-->
+                                        <div class="card-body p-4">
+                                            <div class="text-center">
+                                                <!-- Product name-->
+                                                <h5 class="fw-bolder">{{game.title}}</h5>
+                                                <!-- Product reviews-->
+                                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                    <div class="bi-star-fill"></div>
+                                                </div>
+                                                <!-- Product price-->
+                                                ${{game.price}}
                                             </div>
-                                            <!-- Product price-->
-                                            ${{game.price}}
+                                        </div>
+                                        <!-- Product actions-->
+                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{game.get_absolute_url}}">View</a></div>
                                         </div>
                                     </div>
-                                    <!-- Product actions-->
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{game.get_absolute_url}}">View</a></div>
-                                    </div>
                                 </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="pagination justify-content-center">
-                <ul class="pagination">
-                    {% if page_obj.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
-                    {% endif %}
+                <div class="pagination justify-content-center">
+                    <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                            {% endif %}
 
-                    {% if not page_obj.has_previous %}
-                        <li class="page-item disabled"><a class="page-link" href="#">&laquo; First</a></li>
-                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                    {% endif %}
+                            {% if not page_obj.has_previous %}
+                                <li class="page-item disabled"><a class="page-link" href="#">First</a></li>
+                                <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
+                            {% endif %}
+                        
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">
+                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                                </a>
+                            </li>
                     
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-                        </a>
-                    </li>
-            
-                    {% if page_obj.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
-                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a></li>
-                    {% endif %}
+                            {% if page_obj.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                                <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+                            {% endif %}
 
-                    {% if not page_obj.has_next %}
-                        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-                        <li class="page-item disabled"><a class="page-link" href="#">Last &raquo;</a></li>
-                    {% endif %}
-                </ul>
-            </div>
+                            {% if not page_obj.has_next %}
+                                <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+                                <li class="page-item disabled"><a class="page-link" href="#">Last</a></li>
+                            {% endif %}
+                    </ul>
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col">
+                        <h6>Результатов по вашему запросу: 0</h6>
+                    </div>
+                </div> 
+            {% endif %}
         </div>
     </section>
 
