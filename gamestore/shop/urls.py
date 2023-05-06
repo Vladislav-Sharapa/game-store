@@ -6,6 +6,7 @@ urlpatterns = [
     path('game/<slug:game_slug>', views.product_detail, name='games'),
     path('catalog/', views.Catalog.as_view(), name='catalog'),
     path('catalog/<slug>', views.Catalog.as_view(), name='catalog_view'),
+    path('catalog/search/', views.Catalog.as_view(), name='catalog_search'),
 
 ]
 
