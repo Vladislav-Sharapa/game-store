@@ -3,13 +3,13 @@
     <section class="py-5 bg-light">
         <div class="container px-4 px-lg-5 mt-5">
             <h2 class="fw-bolder mb-4">Related products</h2>
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-center">
 
                 {% for game in games %}
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top h-50" src="{{game.horizontal_photo.url}}" alt="..." />
+                            <img class="card-img-top img-responsive" src="{{game.horizontal_photo.url}}" alt="..." />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -37,9 +37,4 @@
             </div>
         </div>
     </section>
-
-{% else %}
-
-        <h6>ТУПОКА ПУСТО</h6>
-
 {% endif %}

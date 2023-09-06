@@ -33,7 +33,7 @@ class Game(models.Model):
             vertical_img.save(self.vertical_photo.path)
 
         if horizontal_img.width != 450 or horizontal_img.height != 300:
-            size = (450, 300)
+            size = (450, 250)
             horizontal_img.thumbnail(size)
             horizontal_img.save(self.horizontal_photo.path)
 
@@ -58,6 +58,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse('category', kwargs={'category_slug': self.slug})
 
