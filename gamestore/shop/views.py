@@ -4,9 +4,6 @@ from django.views import generic
 from django.core.paginator import Paginator
 import random
 
-
-
-# Create your views here.
 def main(request):
     return render(request, 'shop/home.html')
 
@@ -27,8 +24,11 @@ class Catalog(generic.ListView):
     template_name = 'shop/catalog.html'
 
     def get_queryset(self):
+        query = self.request.GET.get('q')
         if self.kwargs.get('slug'):
-            games = Category.objects.get(slug=self.kwargs['slug']).game_set.all() # получим все игры той же категории
+            games = Category.objects.get(slug=self.kwargs['slug']).game_set.all() # receive all games of the same category
+        elif query:
+            games = Game.objects.filter(title__icontains=query)
         else:
             games = Game.objects.all()
         return games
@@ -41,8 +41,6 @@ class Catalog(generic.ListView):
         else:
             context['current_category'] = 'All category'
         return context
-
-
 
 
 class BrowseHomePage(generic.ListView):
