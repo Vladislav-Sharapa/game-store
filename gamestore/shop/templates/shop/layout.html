@@ -33,13 +33,17 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <button class="btn btn-outline-dark" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                    </button>
-                </form>
+                <a class="btn btn-outline-dark" href="{% url 'cart:cart_detail'%}">
+                    <i class="bi-cart-fill me-1"></i>
+                         Cart
+                    {% with total_items=cart|length %}
+                        {% if cart|length > 0 %}
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">{{ total_items }}</span>
+                        {% else %}
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        {% endif %}
+                    {% endwith %}
+                </a>
             </div>
         </div>
     </nav>
