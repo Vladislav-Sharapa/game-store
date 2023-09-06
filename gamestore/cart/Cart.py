@@ -47,6 +47,10 @@ class Cart(object):
             item['price'] = Decimal(item['price'])
             yield item
 
+    def __len__(self):
+        '''Count all items in cart'''
+        return len(self.cart)
+
     def get_total_price(self) -> Decimal:
         '''Get total price of all item in cart'''
         return sum(item['price'] for item in self.cart.values())
